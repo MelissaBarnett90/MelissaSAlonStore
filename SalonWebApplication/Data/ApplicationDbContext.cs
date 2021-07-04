@@ -19,10 +19,10 @@ namespace SalonWebApplication.Data
          public DbSet<Appointment> Appointments { get; set; }
          public DbSet<Employee> Employees { get; set; }
          public DbSet<PaymentType> PaymentTypes { get; set; }
-         public DbSet<Products> Products { get; set; }
+         public DbSet<Product> Products { get; set; }
          public DbSet<Customer> Customers { get; set; }
          public DbSet<Order> Orders { get; set; }
-         public DbSet<OrderDetails> OrderDetails { get; set; }
+         public DbSet<OrdersDetails> OrderDetails { get; set; }
 
     }
 }
