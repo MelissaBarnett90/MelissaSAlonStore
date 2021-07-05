@@ -21,7 +21,7 @@ namespace SalonWebApplication.Data
         [Required]
 
         public byte[] ProductImg { get; set; }
-        [Required]
+        
 
 
     }

@@ -17,7 +17,7 @@ namespace SalonWebApplication.Data
         [Required]
 
         public TimeSpan Duration { get; set; }
-        [Required]
+     
 
 
 
