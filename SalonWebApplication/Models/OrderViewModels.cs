@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Models
 {
-    public class OrderViewModel
+    public class OrderViewModels
     {
         [Key]
         public int OrderId { get; set; }    

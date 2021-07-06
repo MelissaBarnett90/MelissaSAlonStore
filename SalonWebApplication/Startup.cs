@@ -11,7 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
+using SalonWebApplication.Mappers;
+using SalonWebApplication.Repository;
 
 namespace SalonWebApplication
 {
@@ -32,9 +35,22 @@ namespace SalonWebApplication
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrdersDetailsRepository, OrdersDetailsRepository>();
+            services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IServiceAppointmentRepository, ServiceAppointmentRepository>();
+            services.AddScoped<IServiceRepository, ServiceRepository>();
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(Maps));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
