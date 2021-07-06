@@ -7,56 +7,53 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Repository
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class ProductRepository : IProductRepository
     {
+
         private readonly ApplicationDbContext _db;// the database in initialise in the programm
 
-        public AppointmentRepository(ApplicationDbContext db)// passing the database inside the parameter 
+        public ProductRepository(ApplicationDbContext db)// passing the database inside the parameter 
         {
             _db = db;// passing an object inside the so we can get the information for the database.
         }
 
-        public bool Create(Appointment entity)
+        public bool Create(Product entity)
         {
-            _db.Appointments.Add(entity);
+            _db.Products.Add(entity);
             // throw new NotImplementedException();
             return save();
         }
 
-        public bool Delete(Appointment entity)
+        public bool Delete(Product entity)
         {
-            _db.Appointments.Remove(entity);
+            _db.Products.Remove(entity);
             return save();
             //throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> FindAll()
+        public ICollection<Product> FindAll()
         {
-            _db.Appointments.ToList();
-            return _db.Appointments.ToList();
+            _db.Products.ToList();
+            return _db.Products.ToList();
             //throw new NotImplementedException();
         }
 
-        public Appointment FindById(int id)
+        public Product FindById(int id)
         {
-            _db.Appointments.Find(id);
-            return _db.Appointments.Find(id);
+            _db.Products.Find(id);
+            return _db.Products.Find(id);
             // throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> GetAppointmentsByID(int id)
+        public ICollection<Product> GetProductByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> GetAppointmentByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public bool isExist(int id)
         {
-            var exist = _db.Appointments.Any(q => q.AppointmentId == id);
+            var exist = _db.Products.Any(q => q.ProductId == id);
             return exist;
         }
 
@@ -66,11 +63,26 @@ namespace SalonWebApplication.Repository
             // throw new NotImplementedException();
         }
 
-        public bool Update(Appointment entity)
+        public bool Update(Product entity)
         {
-            _db.Appointments.Update(entity);
+            _db.Products.Update(entity);
             return save();
             // throw new NotImplementedException();
+        }
+
+        ICollection<Product> IRepositoryBase<Product>.FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Product IRepositoryBase<Product>.FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Product> GetProductssByID(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
@@ -79,5 +91,3 @@ namespace SalonWebApplication.Repository
         }
     }
 }
-
-

@@ -7,56 +7,56 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Repository
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class PaymentTypeRepository : IPaymentTypeRepository
     {
         private readonly ApplicationDbContext _db;// the database in initialise in the programm
 
-        public AppointmentRepository(ApplicationDbContext db)// passing the database inside the parameter 
+        public PaymentTypeRepository(ApplicationDbContext db)// passing the database inside the parameter 
         {
             _db = db;// passing an object inside the so we can get the information for the database.
         }
 
-        public bool Create(Appointment entity)
+        public bool Create(PaymentType entity)
         {
-            _db.Appointments.Add(entity);
+            _db.PaymentTypes.Add(entity);
             // throw new NotImplementedException();
             return save();
         }
 
-        public bool Delete(Appointment entity)
+        public bool Delete(PaymentType entity)
         {
-            _db.Appointments.Remove(entity);
+            _db.PaymentTypes.Remove(entity);
             return save();
             //throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> FindAll()
+        public ICollection<PaymentType> FindAll()
         {
-            _db.Appointments.ToList();
-            return _db.Appointments.ToList();
+            _db.PaymentTypes.ToList();
+            return _db.PaymentTypes.ToList();
             //throw new NotImplementedException();
         }
 
-        public Appointment FindById(int id)
+        public PaymentType FindById(int id)
         {
-            _db.Appointments.Find(id);
-            return _db.Appointments.Find(id);
+            _db.PaymentTypes.Find(id);
+            return _db.PaymentTypes.Find(id);
             // throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> GetAppointmentsByID(int id)
+        public ICollection<PaymentType> GetAppointmentsByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> GetAppointmentByID(int id)
+        public ICollection<PaymentType> GetPaymentTypeByID(int id)
         {
             throw new NotImplementedException();
         }
 
         public bool isExist(int id)
         {
-            var exist = _db.Appointments.Any(q => q.AppointmentId == id);
+            var exist = _db.PaymentTypes.Any(q => q.PaymentTypeId == id);
             return exist;
         }
 
@@ -66,12 +66,30 @@ namespace SalonWebApplication.Repository
             // throw new NotImplementedException();
         }
 
-        public bool Update(Appointment entity)
+        public bool Update(PaymentType entity)
         {
-            _db.Appointments.Update(entity);
+            _db.PaymentTypes.Update(entity);
             return save();
             // throw new NotImplementedException();
         }
+
+      
+        public ICollection<PaymentType> GetPaymentTypesByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        ICollection<PaymentType> IRepositoryBase<PaymentType>.FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        PaymentType IRepositoryBase<PaymentType>.FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+       
 
         public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
         {
@@ -79,5 +97,3 @@ namespace SalonWebApplication.Repository
         }
     }
 }
-
-

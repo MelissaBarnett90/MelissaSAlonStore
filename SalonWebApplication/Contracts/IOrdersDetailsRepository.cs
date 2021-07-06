@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Contracts
 {
-    interface IOrderDetailsRepository : IRepositoryBase<OrdersDetails>
+    interface IOrdersDetailsRepository : IRepositoryBase<OrdersDetails>
     {
         ICollection<OrdersDetails> GetOrdersDetailsByID (int id);
         

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 namespace SalonWebApplication.Data
 {
     public class Customer
-    { public int  CustomerId {get;set;}
-        public string CustomerFirstName { get; set; }
+    {
+    public int  CustomerId {get;set;}
+    public string CustomerFirstName { get; set; }
     public string CustomerLastName { get; set; }
     public string CustomerDOB { get; set; }
     public string CustomerContact { get; set; }

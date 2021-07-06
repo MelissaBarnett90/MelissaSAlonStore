@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SalonWebApplication.Data
+namespace SalonWebApplication.Models
 {
-    public class Service
-    {   
+    public class ServiceViewModel
+    {
         [Key]
         public int ServiceId { get; set; }
 
@@ -18,9 +18,5 @@ namespace SalonWebApplication.Data
         [Required]
 
         public TimeSpan Duration { get; set; }
-
-
-
-
     }
 }

@@ -18,9 +18,7 @@ namespace SalonWebApplication.Data
         [ForeignKey("AppointmentId")]
         public Appointment Appointments { get; set; }
         public int AppointmentId { get; set; }
-
-
-       
+           
 
         
 

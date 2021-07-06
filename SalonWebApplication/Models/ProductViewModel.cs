@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SalonWebApplication.Data
+namespace SalonWebApplication.Models
 {
-    public class Product
-    {  
+    public class ProductViewModel
+    {
         [Key]
         public int ProductId { get; set; }
         [Required]
@@ -22,7 +22,5 @@ namespace SalonWebApplication.Data
         [Required]
 
         public byte[] ProductImg { get; set; }
-        
-
     }
 }

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace SalonWebApplication.Data
 {
     public class OrdersDetails
-    {  [Key]
+    { 
+        [Key]
          public int OrderDetailsId { get; set; }
 
         [ForeignKey("OrderId")]

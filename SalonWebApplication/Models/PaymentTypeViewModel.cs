@@ -4,15 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SalonWebApplication.Data
+namespace SalonWebApplication.Models
 {
-    public class PaymentType
-    {  
+    public class PaymentTypeViewModel
+    {
         [Key]
         public int PaymentTypeId { get; set; }
         [Required]
 
         public string PaymentName { get; set; }
-      
     }
 }

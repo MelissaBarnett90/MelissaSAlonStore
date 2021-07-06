@@ -12,9 +12,10 @@ namespace SalonWebApplication.Data
         [Key]
        public int  OrderId { get; set; }
 
-      
+        [ForeignKey("CustomerId")]
+
         public Customer Customers { get; set; }
-        public int Id { get; set; }
+       public int CustomerId { get; set; }
 
         public DateTime OrderDate { get; set; }
 
