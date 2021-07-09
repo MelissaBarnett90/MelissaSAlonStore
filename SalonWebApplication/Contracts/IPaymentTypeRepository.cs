@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Contracts
 {
-    interface IPaymentTypeRepository : IRepositoryBase<PaymentType>
+   public interface IPaymentTypeRepository : IRepositoryBase<PaymentType>
     {
         ICollection<PaymentType> GetPaymentTypesByID(int id);
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Contracts
 {
-    interface IEmployeeRepository : IRepositoryBase<Employee>
+    public interface IEmployeeRepository : IRepositoryBase<Employee>
     {
         ICollection<Employee> GetEmployeesByID(int id);
     }

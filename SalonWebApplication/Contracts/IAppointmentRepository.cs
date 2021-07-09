@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Contracts
 {
-    interface IAppointmentRepository : IRepositoryBase<Appointment>
+    public interface IAppointmentRepository : IRepositoryBase<Appointment>
     {
         ICollection<Appointment> GetAppointmentsByID(int id);
     }
