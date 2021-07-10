@@ -78,19 +78,5 @@ namespace SalonWebApplication.Repository
 
       
 
-        ICollection<Employee> IRepositoryBase<Employee>.FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Employee IRepositoryBase<Employee>.FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        ICollection<Employee> IEmployeeRepository.GetEmployeesByID(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

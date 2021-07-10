@@ -18,7 +18,7 @@ namespace SalonWebApplication.Mappers
             CreateMap<Employee, EmployeeViewModel>().ReverseMap();
             ////  CreateMap<Supplier, CalcationViewModel>().ReverseMap();
 
-            CreateMap<Order, OrderViewModels>().ReverseMap();
+            CreateMap<Order, OrderViewModel>().ReverseMap();
             CreateMap<OrdersDetails, OrdersDetailsViewModel>().ReverseMap();
             CreateMap<PaymentType, PaymentTypeViewModel>().ReverseMap();
 

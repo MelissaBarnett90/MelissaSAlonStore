@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
+using SalonWebApplication.Data;
+using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,20 +27,27 @@ namespace SalonWebApplication.Controllers
 
         }
 
-
-
-
-
         // GET: ServiceAppointmentController
         public ActionResult Index()
         {
-            return View();
+            var typesofserviceappointment = _serviceAppointmentRepo.FindAll().ToList();
+
+            var maptoserviceAppointment = _mapper.Map<List<ServiceAppointment>, List<ServiceAppointmentViewModel>>(typesofserviceappointment);
+
+            return View(maptoserviceAppointment);
         }
 
         // GET: ServiceAppointmentController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            if (!_serviceAppointmentRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var typesofserviceappointment = _serviceAppointmentRepo.FindById(id);
+            var maptoserviceAppointment = _mapper.Map<ServiceAppointmentViewModel>(typesofserviceappointment);
+            return View(maptoserviceAppointment);
         }
 
         // GET: ServiceAppointmentController/Create

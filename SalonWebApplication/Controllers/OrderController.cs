@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
+using SalonWebApplication.Data;
+using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +33,24 @@ namespace SalonWebApplication.Controllers
         // GET: OrderController
         public ActionResult Index()
         {
-            return View();
+            var typesoforder = _OrderRepo.FindAll().ToList();
+
+            var maptoOrder = _mapper.Map<List<Order>, List<OrderViewModel>>(typesoforder);
+
+            return View(maptoOrder);
         }
 
         // GET: OrderController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            if (!_OrderRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var typesoforder = _OrderRepo.FindById(id);
+            var maptoOrder = _mapper.Map<OrderViewModel>(typesoforder);
+            return View(maptoOrder);
         }
 
         // GET: OrderController/Create

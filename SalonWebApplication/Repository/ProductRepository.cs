@@ -45,12 +45,21 @@ namespace SalonWebApplication.Repository
             // throw new NotImplementedException();
         }
 
+        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<Product> GetProductByID(int id)
         {
             throw new NotImplementedException();
         }
 
-       
+        public ICollection<Product> GetProductssByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool isExist(int id)
         {
             var exist = _db.Products.Any(q => q.ProductId == id);
@@ -70,24 +79,6 @@ namespace SalonWebApplication.Repository
             // throw new NotImplementedException();
         }
 
-        ICollection<Product> IRepositoryBase<Product>.FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Product IRepositoryBase<Product>.FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<Product> GetProductssByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

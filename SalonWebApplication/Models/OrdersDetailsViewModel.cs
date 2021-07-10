@@ -12,7 +12,7 @@ namespace SalonWebApplication.Models
         [Key]
         public int OrderDetailsId { get; set; }
 
-        public OrderViewModels Order { get; set; }
+        public OrderViewModel Order { get; set; }
         public IEnumerable<SelectListItem> Orders { get; set; }
         public int OrderId { get; set; }
 
