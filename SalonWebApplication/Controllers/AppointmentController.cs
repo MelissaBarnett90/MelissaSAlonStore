@@ -55,73 +55,126 @@ namespace SalonWebApplication.Controllers
         public ActionResult Create()
         {
             var employee = _employeeRepo.FindAll();
-            var supplierItems = employee.Select(q => new SelectListItem
+            var employeeClients = employee.Select(q => new SelectListItem
             {
                 Text = q.FirstName,
-
                 Value = q.Id.ToString()
 
 
             });
 
+            var customer = _customerRepo.FindAll();
+            var employeeCustomer = customer.Select(q => new SelectListItem
+            {
+                Text = q.CustomerFirstName + q.CustomerLastName,
+                Value = q.CustomerId.ToString()
+            }
+            ); ;
             var model = new AppointmentViewModel
             {
-                Employee = supplierItems
-
+                Employees = employeeClients,
+             Customers = employeeCustomer
             };
-
+         
             return View(model);
         }
 
         // POST: AppointmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(AppointmentViewModel model)
         {
+
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appointment = _mapper.Map<Appointment>(model);
+                var issuccessful = _AppointmentRepo.Create(appointment);
+                if (!issuccessful)
+                {
+                    ModelState.AddModelError("", "Something Went wrong......");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something Went wrong......");
+                return View(model);
             }
         }
 
         // GET: AppointmentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_AppointmentRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var appointment = _AppointmentRepo.FindById(id);
+            var model = _mapper.Map<AppointmentViewModel>(appointment);
+            return View(model);
+
+
         }
 
         // POST: AppointmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(AppointmentViewModel model)
         {
+
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appointment = _mapper.Map<Appointment>(model);
+                var isSucess = _AppointmentRepo.Update(appointment);
+                if (!isSucess)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong");
+                return View(model);
             }
         }
 
         // GET: AppointmentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+
+            var appointment = _AppointmentRepo.FindById(id);
+            var isSucess = _AppointmentRepo.Delete(appointment);
+            if (!isSucess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: AppointmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, AppointmentViewModel model)
         {
             try
             {
+                var appointment = _AppointmentRepo.FindById(id);
+                var isSucess = _AppointmentRepo.Delete(appointment);
+                if (!isSucess)
+                {
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
