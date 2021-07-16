@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalonWebApplication.Models.ProductViewModel>
+﻿@model IEnumerable<SalonWebApplication.Models.ServiceViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,20 +12,17 @@
 <table class="table">
     <thead>
         <tr>
-           @* <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.ProductName)
+                @Html.DisplayNameFor(model => model.ServiceId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductCost)
+                @Html.DisplayNameFor(model => model.ServiceName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductQty)
+                @Html.DisplayNameFor(model => model.ServiceCost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductImg)
+                @Html.DisplayNameFor(model => model.Duration)
             </th>
             <th></th>
         </tr>
@@ -33,20 +30,17 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
+                @Html.DisplayFor(modelItem => item.ServiceId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductCost)
+                @Html.DisplayFor(modelItem => item.ServiceName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductQty)
+                @Html.DisplayFor(modelItem => item.ServiceCost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductImg)
+                @Html.DisplayFor(modelItem => item.Duration)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

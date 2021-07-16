@@ -49,10 +49,20 @@ namespace SalonWebApplication.Repository
             throw new NotImplementedException();
         }
 
-        public ICollection<Appointment> GetAppointmentByID(int id)
+        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
         {
             throw new NotImplementedException();
         }
+
+        /* public ICollection<Appointment> GetAppointmentsByID(int id)
+         {
+             throw new NotImplementedException();
+         }
+
+         public ICollection<Appointment> GetAppointmentByID(int id)
+         {
+             throw new NotImplementedException();
+         }*/
 
         public bool isExist(int id)
         {
@@ -73,10 +83,10 @@ namespace SalonWebApplication.Repository
             // throw new NotImplementedException();
         }
 
-        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
+       /* public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }
 

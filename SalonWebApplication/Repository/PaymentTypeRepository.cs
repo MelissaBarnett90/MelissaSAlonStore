@@ -49,7 +49,17 @@ namespace SalonWebApplication.Repository
             throw new NotImplementedException();
         }
 
+        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<PaymentType> GetPaymentTypeByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<PaymentType> GetPaymentTypesByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -74,26 +84,7 @@ namespace SalonWebApplication.Repository
         }
 
       
-        public ICollection<PaymentType> GetPaymentTypesByID(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        ICollection<PaymentType> IRepositoryBase<PaymentType>.FindAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        PaymentType IRepositoryBase<PaymentType>.FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-       
-
-        public ICollection<OrdersDetails> GetOrderDetailsByID(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

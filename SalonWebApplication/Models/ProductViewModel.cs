@@ -22,5 +22,13 @@ namespace SalonWebApplication.Models
         [Required]
 
         public byte[] ProductImg { get; set; }
+
+
+        [Required(ErrorMessage = "Please upload an image")]
+        [Display(Name = "Picture")]
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public Microsoft.AspNetCore.Http.IFormFile Picture { get; set;}
+
+
     }
 }
