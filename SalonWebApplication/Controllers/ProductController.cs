@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
@@ -6,6 +7,7 @@ using SalonWebApplication.Data;
 using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,11 +18,13 @@ namespace SalonWebApplication.Controllers
 
         private readonly IProductRepository _productRepo;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductController(IProductRepository productrepo, IMapper mapper)
+        public ProductController(IProductRepository productrepo, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _productRepo = productrepo;
             _mapper = mapper;
+            this._hostEnvironment = hostEnvironment;
         }
 
 
@@ -63,6 +67,10 @@ namespace SalonWebApplication.Controllers
                 {
                     return View(model);
                 }
+                if(model.Picture != null)
+                {
+                    model.ProductImg = UploadImage(model.Picture);
+                }
                 var product = _mapper.Map<Product>(model);
                 var issuccessful = _productRepo.Create(product);
                 if (!issuccessful)
@@ -77,6 +85,29 @@ namespace SalonWebApplication.Controllers
                 ModelState.AddModelError("", "Something Went wrong......");
                 return View(model);
             }
+        }
+
+        private string UploadImage(IFormFile file)
+        {
+            ////Generate Image upload path
+            string uploads = Path.Combine(_hostEnvironment.WebRootPath, "uploads", "product_images");
+            if (file.Length > 0)
+            {
+                ////Get Extension for image and create new filename from random GUID and extension
+                var extension = Path.GetExtension(file.FileName);
+                var imageName = $"{Guid.NewGuid().ToString().Replace("-", "")}{extension}";
+                var imagePath = Path.Combine(uploads, imageName);
+
+                ////Use Filestream to copy file from memory to the path 
+                using Stream filestream = new FileStream(imagePath, FileMode.Create);
+                file.CopyTo(filestream);
+
+
+                ///Return image name to be stored in database
+                return imageName;
+            }
+
+            return string.Empty;
         }
 
         // GET: ProductController/Edit/5

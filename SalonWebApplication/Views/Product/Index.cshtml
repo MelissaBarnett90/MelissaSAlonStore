@@ -40,13 +40,15 @@
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductCost)
+                @item.ProductCost.ToString("C")
+                @*@Html.DisplayFor(modelItem => item.ProductCost)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductQty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductImg)
+                <img src="~/uploads/product_images/@item.ProductImg" width="50" height="50" />
+                @*@Html.DisplayFor(modelItem => item.ProductImg)*@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

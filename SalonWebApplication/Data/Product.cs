@@ -21,8 +21,7 @@ namespace SalonWebApplication.Data
         public int ProductQty { get; set; }
         [Required]
 
-        public byte[] ProductImg { get; set; }
+        public string ProductImg { get; set; }
         
-
     }
 }

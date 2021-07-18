@@ -19,7 +19,8 @@ namespace SalonWebApplication.Controllers
         private readonly ICustomerRepository _customerRepo;
         private readonly IMapper _mapper;
 
-        public AppointmentController(IAppointmentRepository AppointmentRepo, IEmployeeRepository employeeRepo, ICustomerRepository customerRepo, Mapper mapper)
+        public AppointmentController(IAppointmentRepository AppointmentRepo, IEmployeeRepository employeeRepo, 
+            ICustomerRepository customerRepo, IMapper mapper)
         {
             _AppointmentRepo = AppointmentRepo;
             _customerRepo = customerRepo;
@@ -32,11 +33,19 @@ namespace SalonWebApplication.Controllers
         // GET: AppointmentController
         public ActionResult Index()
         {
-            var typesofappointment = _AppointmentRepo.FindAll().ToList();
+            try
+            {
+                var typesofappointment = _AppointmentRepo.FindAll().ToList();
 
-            var maptoAppointment = _mapper.Map<List<Appointment>, List<AppointmentViewModel>>(typesofappointment);
+                var maptoAppointment = _mapper.Map<List<Appointment>, List<AppointmentViewModel>>(typesofappointment);
+                return View(maptoAppointment);
+            }
+            catch (Exception e)
+            {
 
-            return View(maptoAppointment);
+                throw;
+            }
+            
         }
 
         // GET: AppointmentController/Details/5

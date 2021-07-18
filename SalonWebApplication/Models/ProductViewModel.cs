@@ -19,9 +19,8 @@ namespace SalonWebApplication.Models
         [Required]
 
         public int ProductQty { get; set; }
-        [Required]
 
-        public byte[] ProductImg { get; set; }
+        public string ProductImg { get; set; }
 
 
         [Required(ErrorMessage = "Please upload an image")]
