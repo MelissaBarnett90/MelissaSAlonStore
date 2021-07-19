@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
@@ -6,6 +7,7 @@ using SalonWebApplication.Data;
 using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +17,13 @@ namespace SalonWebApplication.Controllers
     {
         private readonly IEmployeeRepository _EmployeeRepo;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public EmployeeController(IEmployeeRepository employeerepo, IMapper mapper)
+        public EmployeeController(IEmployeeRepository employeerepo, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _EmployeeRepo = employeerepo;
             _mapper = mapper;
+            this._hostEnvironment = hostEnvironment;
         }
 
 
@@ -63,6 +67,10 @@ namespace SalonWebApplication.Controllers
                 {
                     return View(model);
                 }
+                if (model.Image != null)
+                {
+                    model.EmployeeImg = UploadImage(model.Image);
+                }
                 var employee = _mapper.Map<Employee>(model);
                 var issuccessful = _EmployeeRepo.Create(employee);
                 if (!issuccessful)
@@ -79,6 +87,30 @@ namespace SalonWebApplication.Controllers
             }
         }
 
+        private string UploadImage(IFormFile file)
+        {
+            ////Generate Image upload path
+            string uploads = Path.Combine(_hostEnvironment.WebRootPath, "uploads", "employee_images");
+            if (file.Length > 0)
+            {
+                ////Get Extension for image and create new filename from random GUID and extension
+                var extension = Path.GetExtension(file.FileName);
+                var imageName = $"{Guid.NewGuid().ToString().Replace("-", "")}{extension}";
+                var imagePath = Path.Combine(uploads, imageName);
+
+
+                ////Use Filestream to copy file from memory to the path 
+                using Stream filestream = new FileStream(imagePath, FileMode.Create);
+                file.CopyTo(filestream);
+
+
+                ///Return image name to be stored in database
+                return imageName;
+            }
+
+            return string.Empty;
+        }
+
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -88,6 +120,7 @@ namespace SalonWebApplication.Controllers
             }
             var employee = _EmployeeRepo.FindById(id);
             var model = _mapper.Map<EmployeeViewModel>(employee);
+
             return View(model);
         }
 
