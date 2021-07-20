@@ -74,15 +74,7 @@ namespace SalonWebApplication.Repository
             return save();
         }
 
-    
-        ICollection<ServiceAppointment> IRepositoryBase<ServiceAppointment>.FindAll()
-        {
-            throw new NotImplementedException();
-        }
 
-        ServiceAppointment IRepositoryBase<ServiceAppointment>.FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

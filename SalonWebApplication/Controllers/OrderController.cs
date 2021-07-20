@@ -62,52 +62,94 @@ namespace SalonWebApplication.Controllers
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(OrderViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appservice = _mapper.Map<Order>(model);
+                var issuccessful = _OrderRepo.Create(appservice);
+                if (!issuccessful)
+                {
+                    ModelState.AddModelError("", "Something Went wrong......");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something Went wrong......");
+                return View(model);
             }
         }
 
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_OrderRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var appservice = _OrderRepo.FindById(id);
+            var model = _mapper.Map<OrderViewModel>(appservice);
+            return View(model);
         }
 
-        // POST: OrderController/Edit/5
+        // POST: ServiceAppointmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, OrderViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appservice = _mapper.Map<Order>(model);
+                var isSucess = _OrderRepo.Update(appservice);
+                if (!isSucess)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong");
+                return View(model);
             }
         }
 
         // GET: OrderController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var appservice = _OrderRepo.FindById(id);
+            var isSucess = _OrderRepo.Delete(appservice);
+            if (!isSucess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: OrderController/Delete/5
+        // POST: ServiceAppointmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, OrderViewModel model)
         {
             try
             {
+                var appservice = _OrderRepo.FindById(id);
+                var isSucess = _OrderRepo.Delete(appservice);
+                if (!isSucess)
+                {
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

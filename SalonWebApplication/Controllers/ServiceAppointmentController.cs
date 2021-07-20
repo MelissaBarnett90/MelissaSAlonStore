@@ -59,52 +59,95 @@ namespace SalonWebApplication.Controllers
         // POST: ServiceAppointmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ServiceAppointment model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appservice = _mapper.Map<ServiceAppointment>(model);
+                var issuccessful = _serviceAppointmentRepo.Create(appservice);
+                if (!issuccessful)
+                {
+                    ModelState.AddModelError("", "Something Went wrong......");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something Went wrong......");
+                return View(model);
             }
         }
+
 
         // GET: ServiceAppointmentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_serviceAppointmentRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var appservice = _serviceAppointmentRepo.FindById(id);
+            var model = _mapper.Map<ServiceAppointmentViewModel>(appservice);
+            return View(model);
         }
 
         // POST: ServiceAppointmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ServiceAppointmentViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var appservice = _mapper.Map<ServiceAppointment>(model);
+                var isSucess = _serviceAppointmentRepo.Update(appservice);
+                if (!isSucess)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong");
+                return View(model);
             }
         }
 
         // GET: ServiceAppointmentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var appservice = _serviceAppointmentRepo.FindById(id);
+            var isSucess = _serviceAppointmentRepo.Delete(appservice);
+            if (!isSucess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: ServiceAppointmentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, ServiceAppointmentViewModel model)
         {
             try
             {
+                var appservice = _serviceAppointmentRepo.FindById(id);
+                var isSucess = _serviceAppointmentRepo.Delete(appservice);
+                if (!isSucess)
+                {
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
