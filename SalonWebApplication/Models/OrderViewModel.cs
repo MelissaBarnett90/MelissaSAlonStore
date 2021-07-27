@@ -37,7 +37,7 @@ namespace SalonWebApplication.Models
         public IEnumerable<SelectListItem> Products { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-       public int ProductQuantity { get; set; }
-public float Productprice { get; set; }
+        public int ProductQuantity { get; set; }
+        public double Productprice { get; set; }
     }
 }

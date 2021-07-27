@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using SalonWebApplication.Models;
@@ -16,13 +17,15 @@ namespace SalonWebApplication.Controllers
         private readonly IOrderRepository _OrderRepo;
         private readonly ICustomerRepository _customerRepo;
         private readonly IPaymentTypeRepository _paymentRepo;
+        private readonly IProductRepository _prodRepo;
         private readonly IMapper _mapper;
 
-        public OrderController(IOrderRepository orderrepo,ICustomerRepository customerRepo,IPaymentTypeRepository paymentRepo, IMapper mapper)
+        public OrderController(IOrderRepository orderrepo,IProductRepository prodRepo, ICustomerRepository customerRepo,IPaymentTypeRepository paymentRepo, IMapper mapper)
         {
             _OrderRepo = orderrepo;
             _customerRepo = customerRepo;
             _paymentRepo = paymentRepo;
+            _prodRepo = prodRepo;
             _mapper = mapper;
 
         }
@@ -54,36 +57,112 @@ namespace SalonWebApplication.Controllers
         }
 
         // GET: OrderController/Create
-        public ActionResult Create()
+        public ActionResult Create(OrdersDetails model)
         {
+            var customer = _customerRepo.FindAll();
+            var customername = customer.Select(q => new SelectListItem
+            {
+                Text = q.CustomerFirstName + q.CustomerLastName,
+                Value = q.CustomerId.ToString()
+            }
+            ) ;
+
+            var Products =_prodRepo.FindAll();
+            var Productsname = Products.Select(q => new SelectListItem
+            {
+                Text = $"{ q.ProductName } - ${ q.ProductCost}",
+                Value = q.ProductId.ToString()
+            }
+            );
+
+            var Payment = _paymentRepo.FindAll();
+            var Paymentname = Payment.Select(q => new SelectListItem
+            {
+                Text = q.PaymentName,
+                Value = q.PaymentTypeId.ToString()
+            }
+            );
+
+
             return View();
         }
-
+        
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrderViewModel model)
         {
-            try
+            /* try
+             {
+                 if (!ModelState.IsValid)
+                 {
+                     return View(model);
+                 }
+                 var appservice = _mapper.Map<Order>(model);
+                 var issuccessful = _OrderRepo.Create(appservice);
+                 if (!issuccessful)
+                 {
+                     ModelState.AddModelError("", "Something Went wrong......");
+                     return View(model);
+                 }
+                 return RedirectToAction(nameof(Index));
+             };*/
+
+
+            /* catch
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-                var appservice = _mapper.Map<Order>(model);
-                var issuccessful = _OrderRepo.Create(appservice);
-                if (!issuccessful)
-                {
-                    ModelState.AddModelError("", "Something Went wrong......");
-                    return View(model);
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+                ModelState.AddModelError("", "Something Went wrong......");*/
+            var customer = _customerRepo.FindAll();
+            var customername = customer.Select(q => new SelectListItem
             {
-                ModelState.AddModelError("", "Something Went wrong......");
-                return View(model);
+                Text = q.CustomerFirstName + q.CustomerLastName,
+                Value = q.CustomerId.ToString()
             }
+            );
+
+            var Products = _prodRepo.FindAll();
+            var Productsname = Products.Select(q => new SelectListItem
+            {
+                Text = $"{ q.ProductName } - ${ q.ProductCost}",
+                Value = q.ProductId.ToString()
+            }
+            );
+
+            var Payment = _paymentRepo.FindAll();
+            var Paymentname = Payment.Select(q => new SelectListItem
+            {
+                Text = q.PaymentName,
+                Value = q.PaymentTypeId.ToString()
+            }
+            );
+
+            model.Customers = customername;
+            model.Products = Productsname;
+            model.PaymentTypes = Paymentname;
+
+            var product = _prodRepo.FindById(model.ProductId);
+            var totalcost = model.Total;
+            if (product.ProductQty>model.ProductQuantity)
+            {
+                totalcost = product.ProductCost * model.ProductQuantity;
+            }
+            else if (model.ProductQuantity<=0)
+            {
+                ModelState.AddModelError("", "please enter a value for the quantity");
+              return View(model);
+                    }
+
+            model.Total = totalcost;
+            var salevalue = new OrderViewModel
+            {
+               // objects to pass into the model
+               CustomerId=model.CustomerId,
+               CustomerName=model.CustomerName,
+               Customers=model.Customers,
+
+            };
+         
+            
         }
 
         // GET: OrderController/Edit/5
