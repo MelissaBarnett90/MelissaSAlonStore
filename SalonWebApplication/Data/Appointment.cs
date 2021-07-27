@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,10 +11,13 @@ namespace SalonWebApplication.Data
     public class Appointment
     {   [Key]
         public int AppointmentId { get; set; }
-
-        public DateTime AppointmentDate { get; set; }
-
-        public DateTime AppointmentTime { get; set; }
+        [Required]
+       
+        public string AppointmentDate { get; set; }
+       
+        [Required]
+     
+        public String AppointmentTime { get; set; }
 
         [ForeignKey("EmployeeId")]
         public Employee Employees { get; set; }

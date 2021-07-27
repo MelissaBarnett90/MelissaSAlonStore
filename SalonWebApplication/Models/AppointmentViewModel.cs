@@ -2,6 +2,7 @@
 using SalonWebApplication.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,10 +14,11 @@ namespace SalonWebApplication.Models
     {
         [Key]
         public int AppointmentId { get; set; }
-
-        public DateTime AppointmentDate { get; set; }
-
-        public DateTime AppointmentTime { get; set; }
+        [DisplayName("Date of Appointment")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string AppointmentDate { get; set; }
+        [DataType(DataType.DateTime), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
+        public string AppointmentTime { get; set; }
 
         public EmployeeViewModel Employee { get; set; }
         public IEnumerable<SelectListItem> Employees { get; set; }
