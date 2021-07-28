@@ -34,8 +34,9 @@ namespace SalonWebApplication.Models
      
 
         public ProductViewModel Product { get; set; }
-        public IEnumerable<SelectListItem> Products { get; set; }
         public int ProductId { get; set; }
+        public IEnumerable<SelectListItem> Products { get; set; }
+       
         public string ProductName { get; set; }
         public int ProductQuantity { get; set; }
         public double Productprice { get; set; }

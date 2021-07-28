@@ -86,14 +86,14 @@ namespace SalonWebApplication.Controllers
 
             return View();
         }
-        
+
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrderViewModel model)
         {
-            /* try
-             {
+             try
+             {/*
                  if (!ModelState.IsValid)
                  {
                      return View(model);
@@ -142,28 +142,52 @@ namespace SalonWebApplication.Controllers
 
             var product = _prodRepo.FindById(model.ProductId);
             var totalcost = model.Total;
-            if (product.ProductQty>model.ProductQuantity)
+            if (product.ProductQty > model.ProductQuantity)
             {
                 totalcost = product.ProductCost * model.ProductQuantity;
             }
-            else if (model.ProductQuantity<=0)
+            else if (model.ProductQuantity <= 0)
             {
                 ModelState.AddModelError("", "please enter a value for the quantity");
-              return View(model);
-                    }
+                return View(model);
+            }
 
             model.Total = totalcost;
             var salevalue = new OrderViewModel
             {
-               // objects to pass into the model
-               CustomerId=model.CustomerId,
-               CustomerName=model.CustomerName,
-               Customers=model.Customers,
+                // objects to pass into the model
+                CustomerId = model.CustomerId,
+                CustomerName = model.CustomerName,
+                Customers = model.Customers,
+                ProductId=model.ProductId,
+                ProductName = model.ProductName,
+                Productprice = model.Productprice,
+                Products = model.Products,
+                ProductQuantity = model.ProductQuantity,
+                OrderId = model.OrderId,
+                Total = model.Total
 
             };
-         
-            
+
+            var orderproduct = _mapper.Map<Order>(salevalue);
+            var isuccessful = _OrderRepo.Create(orderproduct);
+
+            if (!isuccessful)
+            {
+                ModelState.AddModelError("", "Something went wrong while submitting you record...");
+                return View(model);
+
+            }
+            return RedirectToAction(nameof(Index));
         }
+            catch
+            {
+                ModelState.AddModelError("", "Something went wrong submitting your record...");
+                return View (model);
+            }
+
+        }
+
 
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)

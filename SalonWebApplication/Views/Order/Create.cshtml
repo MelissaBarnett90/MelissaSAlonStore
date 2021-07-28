@@ -19,8 +19,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="CustomerId" class="control-label"></label>
-                <input asp-for="CustomerId" class="form-control" />
+                @Html.DropDownListFor(q => q.CustomerId, new SelectList(Model.Customers, "Value", "Text"), "Selecta customer",
+           new { @class = "form-control" })
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OrderDate" class="control-label"></label>
@@ -34,8 +40,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="PaymentTypeId" class="control-label"></label>
-                <input asp-for="PaymentTypeId" class="form-control" />
+                @Html.DropDownListFor(q => q.PaymentTypeId, new SelectList(Model.PaymentTypes, "Value", "Text"), "Selecta PaymentType",
+            new { @class = "form-control" })
                 <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paymentname" class="control-label"></label>
+                <input asp-for="Paymentname" class="form-control" />
+                <span asp-validation-for="Paymentname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.ProductId, new SelectList(Model.Products, "Value", "Text"), "Selecta customer",
+           new { @class = "form-control" })
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductQuantity" class="control-label"></label>
+                <input asp-for="ProductQuantity" class="form-control" />
+                <span asp-validation-for="ProductQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Productprice" class="control-label"></label>
+                <input asp-for="Productprice" class="form-control" />
+                <span asp-validation-for="Productprice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
