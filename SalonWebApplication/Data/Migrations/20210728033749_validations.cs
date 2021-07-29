@@ -74,7 +74,7 @@ namespace SalonWebApplication.Data.Migrations
                 column: "ProductId",
                 principalTable: "Products",
                 principalColumn: "ProductId",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

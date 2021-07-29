@@ -16,7 +16,6 @@ namespace SalonWebApplication.Data
 
         public Customer Customers { get; set; }
        public int CustomerId { get; set; }
-        public string CustomerName { get; set; }
         public DateTime OrderDate { get; set; }
 
         public double Total { get; set; }
@@ -25,17 +24,9 @@ namespace SalonWebApplication.Data
         public PaymentType PaymentTypes { get; set; }
 
         public int PaymentTypeId { get; set; }
-        public int PaymentName { get; set; }
 
+        public List<OrdersDetails> OrderDetails { get; set; }
 
-        [ForeignKey("ProductId")]
-
-        public Product Products { get; set; }
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int ProductPrice { get; set; }
-
-        public int Quantity { get; set; }
     }
 }
 
