@@ -26,6 +26,8 @@ namespace SalonWebApplication.Data
         public int PaymentTypeId { get; set; }
 
         public List<OrdersDetails> OrderDetails { get; set; }
+        public int ProductQuantity { get; set; }
+        public double Productprice { get; set; }
 
     }
 }

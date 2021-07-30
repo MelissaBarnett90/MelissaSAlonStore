@@ -19,7 +19,7 @@ namespace SalonWebApplication.Models
         [Display(Name ="Customer Name")]
         public int CustomerId { get; set; }
         [Required]
-        public string CustomerName { get; set; }
+ /*       public string CustomerName { get; set; }*/
 
         public DateTime OrderDate { get; set; }
 
@@ -28,16 +28,17 @@ namespace SalonWebApplication.Models
         public PaymentTypeViewModel PaymentType { get; set; }
         public IEnumerable<SelectListItem> PaymentTypes { get; set; }
         public int PaymentTypeId { get; set; }
-        public string Paymentname { get; set; }
+      /*  public string Paymentname { get; set; }*/
 
 
      
-
-        public ProductViewModel Product { get; set; }
+  [Display(Name ="Product Name")]
         public int ProductId { get; set; }
+        public ProductViewModel Product { get; set; }
+     
         public IEnumerable<SelectListItem> Products { get; set; }
        
-        public string ProductName { get; set; }
+/*        public string ProductName { get; set; }*/
         public int ProductQuantity { get; set; }
         public double Productprice { get; set; }
     }

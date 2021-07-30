@@ -59,24 +59,24 @@ namespace SalonWebApplication.Controllers
         // GET: OrderController/Create
         public ActionResult Create(OrdersDetails model)
         {
-            var customer = _customerRepo.FindAll();
-            var customername = customer.Select(q => new SelectListItem
+            var clients = _customerRepo.FindAll();
+            var customername = clients.Select(q => new SelectListItem
             {
-                Text = q.CustomerFirstName + q.CustomerLastName,
+                Text = $"{ q.CustomerFirstName } - ${ q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             ) ;
 
-            var Products =_prodRepo.FindAll();
-            var Productsname = Products.Select(q => new SelectListItem
+            var Produce =_prodRepo.FindAll();
+            var Productsname = Produce.Select(q => new SelectListItem
             {
                 Text = $"{ q.ProductName } - ${ q.ProductCost}",
                 Value = q.ProductId.ToString()
             }
             );
 
-            var Payment = _paymentRepo.FindAll();
-            var Paymentname = Payment.Select(q => new SelectListItem
+            var funds = _paymentRepo.FindAll();
+            var Paymentname = funds.Select(q => new SelectListItem
             {
                 Text = q.PaymentName,
                 Value = q.PaymentTypeId.ToString()
@@ -93,43 +93,25 @@ namespace SalonWebApplication.Controllers
         public ActionResult Create(OrderViewModel model)
         {
              try
-             {/*
-                 if (!ModelState.IsValid)
-                 {
-                     return View(model);
-                 }
-                 var appservice = _mapper.Map<Order>(model);
-                 var issuccessful = _OrderRepo.Create(appservice);
-                 if (!issuccessful)
-                 {
-                     ModelState.AddModelError("", "Something Went wrong......");
-                     return View(model);
-                 }
-                 return RedirectToAction(nameof(Index));
-             };*/
-
-
-            /* catch
+             {
+            var clients = _customerRepo.FindAll();
+            var customername = clients.Select(q => new SelectListItem
             {
-                ModelState.AddModelError("", "Something Went wrong......");*/
-            var customer = _customerRepo.FindAll();
-            var customername = customer.Select(q => new SelectListItem
-            {
-                Text = q.CustomerFirstName + q.CustomerLastName,
+                Text = $"{ q.CustomerFirstName } - ${ q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             );
 
-            var Products = _prodRepo.FindAll();
-            var Productsname = Products.Select(q => new SelectListItem
+            var Produce = _prodRepo.FindAll();
+            var Productsname = Produce.Select(q => new SelectListItem
             {
                 Text = $"{ q.ProductName } - ${ q.ProductCost}",
                 Value = q.ProductId.ToString()
             }
             );
 
-            var Payment = _paymentRepo.FindAll();
-            var Paymentname = Payment.Select(q => new SelectListItem
+            var funds = _paymentRepo.FindAll();
+            var Paymentname = funds.Select(q => new SelectListItem
             {
                 Text = q.PaymentName,
                 Value = q.PaymentTypeId.ToString()
@@ -153,19 +135,20 @@ namespace SalonWebApplication.Controllers
             }
 
             model.Total = totalcost;
-            var salevalue = new OrderViewModel
-            {
-                // objects to pass into the model
-                CustomerId = model.CustomerId,
-                CustomerName = model.CustomerName,
-                Customers = model.Customers,
-                ProductId=model.ProductId,
-                ProductName = model.ProductName,
-                Productprice = model.Productprice,
-                Products = model.Products,
-                ProductQuantity = model.ProductQuantity,
-                OrderId = model.OrderId,
-                Total = model.Total
+                var salevalue = new OrderViewModel
+                {
+                    // objects to pass into the model
+                    CustomerId = model.CustomerId,
+                    /*    CustomerName = model.CustomerName,*/
+                    Customer = model.Customer,
+                    ProductId = model.ProductId,
+                    /*  ProductName = model.ProductName,*/
+                    Productprice = model.Productprice,
+                    Product = model.Product,
+                    ProductQuantity = model.ProductQuantity,
+                    OrderId = model.OrderId,
+                    Total = model.Total,
+                    OrderDate = model.OrderDate
 
             };
 
@@ -180,9 +163,9 @@ namespace SalonWebApplication.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-            catch
+            catch(Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong submitting your record...");
+              ModelState.AddModelError("", "Something went wrong submitting your record...");
                 return View (model);
             }
 
