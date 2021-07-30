@@ -57,7 +57,7 @@ namespace SalonWebApplication.Controllers
         }
 
         // GET: OrderController/Create
-        public ActionResult Create(OrdersDetails model)
+        public ActionResult Create()
         {
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
@@ -82,9 +82,14 @@ namespace SalonWebApplication.Controllers
                 Value = q.PaymentTypeId.ToString()
             }
             );
+            var model = new OrderViewModel
+            {
+                Customers = customername,
+                Products = Productsname,
+                PaymentTypes = Paymentname,
+            };
 
-
-            return View();
+            return View(model);
         }
 
         // POST: OrderController/Create
@@ -124,11 +129,11 @@ namespace SalonWebApplication.Controllers
 
             var product = _prodRepo.FindById(model.ProductId);
             var totalcost = model.Total;
-            if (product.ProductQty > model.ProductQuantity)
+            if (product.ProductQty > model.ProductQuantities)
             {
-                totalcost = product.ProductCost * model.ProductQuantity;
+                totalcost = product.ProductCost * model.ProductQuantities;
             }
-            else if (model.ProductQuantity <= 0)
+            else if (model.ProductQuantities <= 0)
             {
                 ModelState.AddModelError("", "please enter a value for the quantity");
                 return View(model);
@@ -143,9 +148,9 @@ namespace SalonWebApplication.Controllers
                     Customer = model.Customer,
                     ProductId = model.ProductId,
                     /*  ProductName = model.ProductName,*/
-                    Productprice = model.Productprice,
+                    ProductPrices = model.ProductPrices,
                     Product = model.Product,
-                    ProductQuantity = model.ProductQuantity,
+                    ProductQuantities = model.ProductQuantities,
                     OrderId = model.OrderId,
                     Total = model.Total,
                     OrderDate = model.OrderDate
