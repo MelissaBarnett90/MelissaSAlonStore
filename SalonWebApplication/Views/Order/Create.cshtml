@@ -12,11 +12,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @* <div class="form-group">
-                <label asp-for="OrderId" class="control-label"></label>
-                <input asp-for="OrderId" class="form-control" />
-                <span asp-validation-for="OrderId" class="text-danger"></span>
-            </div>*@
+            @* <div class="form-group">
+            <label asp-for="OrderId" class="control-label"></label>
+            <input asp-for="OrderId" class="form-control" />
+            <span asp-validation-for="OrderId" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="CustomerId" class="control-label"></label>
                 @Html.DropDownListFor(q => q.CustomerId, new SelectList(Model.Customers, "Value", "Text"), "Select a product",
@@ -24,52 +24,53 @@
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
-            </div>*@
+            <label asp-for="CustomerName" class="control-label"></label>
+            <input asp-for="CustomerName" class="form-control" />
+            <span asp-validation-for="CustomerName" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="OrderDate" class="control-label"></label>
                 <input asp-for="OrderDate" class="form-control" />
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
             </div>
-           @* <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
-            </div>*@
+            @* <div class="form-group">
+            <label asp-for="Total" class="control-label"></label>
+            <input asp-for="Total" class="form-control" />
+            <span asp-validation-for="Total" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="PaymentTypeId" class="control-label"></label>
-                @Html.DropDownListFor(q => q.PaymentTypeId, new SelectList(Model.PaymentTypes, "Value", "Text"), "Selecta PaymentType",
+                @Html.DropDownListFor(q => q.PaymentTypeId, new SelectList(Model.PaymentTypes, "Value", "Text"), "Select a Payment Type",
             new { @class = "form-control" })
                 <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
             </div>
-           @* <div class="form-group">
-                <label asp-for="Paymentname" class="control-label"></label>
-                <input asp-for="Paymentname" class="form-control" />
-                <span asp-validation-for="Paymentname" class="text-danger"></span>
-            </div>*@
+            @* <div class="form-group">
+            <label asp-for="Paymentname" class="control-label"></label>
+            <input asp-for="Paymentname" class="form-control" />
+            <span asp-validation-for="Paymentname" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="ProductId" class="control-label"></label>
-                @Html.DropDownListFor(q => q.ProductId, new SelectList(Model.Products, "Value", "Text"), "Selecta customer",
+                @Html.DropDownListFor(q => q.ProductId, new SelectList(Model.Products, "Value", "Text"), "Select a customer",
            new { @class = "form-control" })
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
-           @* <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
-            </div>*@
+            @* <div class="form-group">
+            <label asp-for="ProductName" class="control-label"></label>
+            <input asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="ProductQuantities" class="control-label"></label>
                 <input asp-for="ProductQuantities" class="form-control" />
                 <span asp-validation-for="ProductQuantities" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="ProductPrices" class="control-label"></label>
-                <input asp-for="ProductPrices" class="form-control" />
-                <span asp-validation-for="ProductPrices" class="text-danger"></span>
-            </div>*@
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                @Html.DropDownListFor(q => q.ProductId, new SelectList(Model.Products, "Value", "Text"), "Select a customer",
+           new { @class = "form-control" })
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

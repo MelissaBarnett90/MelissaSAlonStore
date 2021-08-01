@@ -62,7 +62,7 @@ namespace SalonWebApplication.Controllers
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
-                Text = $"{ q.CustomerFirstName } - ${ q.CustomerLastName}",
+                Text = $"{ q.CustomerFirstName } - { q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             ) ;
@@ -162,7 +162,7 @@ namespace SalonWebApplication.Controllers
 
             if (!isuccessful)
             {
-                ModelState.AddModelError("", "Something went wrong while submitting you record...");
+                ModelState.AddModelError("", "Something went wrong while submitting your record...");
                 return View(model);
 
             }
