@@ -1,5 +1,6 @@
 ﻿using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
+using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,11 @@ namespace SalonWebApplication.Repository
         {
             _db.Services.Update(entity);
             return save();
+        }
+
+        public object Update(ServiceViewModel service)
+        {
+            throw new NotImplementedException();
         }
     }
 }

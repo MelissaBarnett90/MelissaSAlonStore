@@ -17,6 +17,8 @@ namespace SalonWebApplication.Data
         public int ServiceCost { get; set; }
         [Required]
 
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @" {0:mm\:ss}")]
         public TimeSpan Duration { get; set; }
 
 

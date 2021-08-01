@@ -46,58 +46,101 @@ namespace SalonWebApplication.Controllers
         // GET: ServiceController/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
         // POST: ServiceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ServiceViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var service = _map.Map<Service>(model);
+                var issuccessful = _serviceRepo.Create(service);
+                if (!issuccessful)
+                {
+                    ModelState.AddModelError("", "Something Went wrong......");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something Went wrong......");
+                return View(model);
             }
         }
 
         // GET: ServiceController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_serviceRepo.isExist(id))
+            {
+                return NotFound();
+            }
+            var work = _serviceRepo.FindById(id);
+            var model = _map.Map<ServiceViewModel>(work);
+            return View(model);
         }
 
         // POST: ServiceController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ServiceViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var work = _map.Map<Service>(model);
+                var isSucess = _serviceRepo.Update(work);
+                if (! isSucess)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong");
+                return View(model);
             }
         }
 
         // GET: ServiceController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var service = _serviceRepo.FindById(id);
+            var isSucess = _serviceRepo.Delete(service);
+            if (!isSucess)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: ServiceController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, ServiceViewModel model)
         {
             try
             {
+                var service = _serviceRepo.FindById(id);
+                var isSucess = _serviceRepo.Delete(service);
+                if (!isSucess)
+                {
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

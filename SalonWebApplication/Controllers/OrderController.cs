@@ -70,7 +70,7 @@ namespace SalonWebApplication.Controllers
             var Produce =_prodRepo.FindAll();
             var Productsname = Produce.Select(q => new SelectListItem
             {
-                Text = $"{ q.ProductName } - ${ q.ProductCost}",
+                Text = $"{ q.ProductName } - { q.ProductCost}",
                 Value = q.ProductId.ToString()
             }
             );
@@ -102,7 +102,7 @@ namespace SalonWebApplication.Controllers
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
-                Text = $"{ q.CustomerFirstName } - ${ q.CustomerLastName}",
+                Text = $"{ q.CustomerFirstName }  { q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             );

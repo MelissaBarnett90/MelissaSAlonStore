@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            <th></th>
+            <th>@Html.Label("Actions")</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,13 @@
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                <a asp-action="Edit" class="btn-warning" asp-route-id="@item.ServiceId "> <i class="fas fa-pencil" aria-hidden="true"> </i>Edit</a>   |
+                <a asp-action="Details" class="btn-success" asp-route-id="@item.ServiceId "> <i class="fade fa-info-circle" aria-hidden="true"> </i>Details</a>  |
+                <a asp-action="Edit" class="btn-danger" asp-route-id="@item.ServiceId " onclick="return confirm('Are you sure you would like to delete this piece of information?? ')"> <i class="fas fa-trash-alt"></i>Delete</a>  |
+
+
+
             </td>
         </tr>
 }
