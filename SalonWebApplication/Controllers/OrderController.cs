@@ -62,7 +62,7 @@ namespace SalonWebApplication.Controllers
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
-                Text = $"{ q.CustomerFirstName } - { q.CustomerLastName}",
+                Text = $"{ q.CustomerFirstName } { q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             ) ;
@@ -102,7 +102,7 @@ namespace SalonWebApplication.Controllers
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
-                Text = $"{ q.CustomerFirstName }  { q.CustomerLastName}",
+                Text = $"{ q.CustomerFirstName } { q.CustomerLastName}",
                 Value = q.CustomerId.ToString()
             }
             );
@@ -144,10 +144,11 @@ namespace SalonWebApplication.Controllers
                 {
                     // objects to pass into the model
                     CustomerId = model.CustomerId,
-                    /*    CustomerName = model.CustomerName,*/
+                  /*   CustomerName = model.CustomerName,*/
                     Customer = model.Customer,
                     ProductId = model.ProductId,
-                    /*  ProductName = model.ProductName,*/
+                  /*  ProductName = model.ProductName,*/
+                  PaymentTypeId=model.PaymentTypeId,
                     ProductPrices = model.ProductPrices,
                     Product = model.Product,
                     ProductQuantities = model.ProductQuantities,

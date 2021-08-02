@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SalonWebApplication.Models
 {
@@ -10,6 +11,7 @@ namespace SalonWebApplication.Models
     {
         [Key]
         public int ServiceId { get; set; }
+        public IEnumerable<SelectListItem> Services { get; set; }
 
         public string ServiceName { get; set; }
         [Required]

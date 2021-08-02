@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SalonWebApplication.Models
 {
@@ -7,10 +9,10 @@ namespace SalonWebApplication.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public string FirstName { get; set; }
-        [Required]
+        public IEnumerable <SelectListItem> Employees { get; set; }
         public string LastName { get; set; }
+        public string FirstName { get; set; }
+
         public string EmployeeImg { get; set; }
 
         [Required(ErrorMessage = "Please upload an image")]
@@ -31,5 +33,6 @@ namespace SalonWebApplication.Models
           ErrorMessage = "Entered phone format is not valid.")]
 
         public string EmployeeContact { get; set; }
+
     }
 }

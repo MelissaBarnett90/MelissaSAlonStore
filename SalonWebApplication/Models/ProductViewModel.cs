@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SalonWebApplication.Models
 {
@@ -10,6 +11,7 @@ namespace SalonWebApplication.Models
     {
         [Key]
         public int ProductId { get; set; }
+        public IEnumerable<SelectListItem> Products { get; set; }
         [Required]
 
         public string ProductName { get; set; }

@@ -19,7 +19,7 @@ namespace SalonWebApplication.Models
         [Display(Name ="Customer Name")]
         public int CustomerId { get; set; }
         [Required]
- /*       public string CustomerName { get; set; }*/
+      public string CustomerName { get; set; }
 
         public DateTime OrderDate { get; set; }
 
