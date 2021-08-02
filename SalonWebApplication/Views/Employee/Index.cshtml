@@ -7,9 +7,9 @@
 <h1>Employees</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
 </p>
-<table class="table">
+<table id="tblData" class="table">
     <thead>
         <tr>
             <th>
@@ -37,40 +37,49 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <img src="~/uploads/employee_images/@item.EmployeeImg" width="50" height="50" />
-                @*@Html.DisplayFor(modelItem => item.EmployeeImg)*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeDOb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeGender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeContact)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <img src="~/uploads/employee_images/@item.EmployeeImg" width="50" height="50" />
+                    @*@Html.DisplayFor(modelItem => item.EmployeeImg)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeDOb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeGender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeContact)
+                </td>
+                <td>
 
-                <a asp-action="Edit" class="btn-warning" asp-route-id="@item.Id "> <i class="fas fa-pencil" aria-hidden="true"> </i>Edit</a>   |
-                <a asp-action="Details" class="btn-success" asp-route-id="@item.Id "> <i class="fade fa-info-circle" aria-hidden="true"> </i>Details</a>  |
-                <a asp-action="Edit" class="btn-danger" asp-route-id="@item.Id " onclick="return confirm('Are you sure you would like to delete this piece of information?? ')"> <i class="fas fa-trash-alt"></i>Delete</a>  |
+                    <a asp-action="Edit" class="btn-warning" asp-route-id="@item.Id "> <i class="i class='fa fa-edit" aria-hidden="true"> </i></a>   |
+                    <a asp-action="Details" class="btn-success" asp-route-id="@item.Id "> <i class="fa fa-info-circle" aria-hidden="true"> </i></a>  |
+                    <a asp-action="Edit" class="btn-danger" asp-route-id="@item.Id " onclick="return confirm('Are you sure you would like to delete this piece of information?? ')"> <i class="fas fa-trash-alt"></i></a>
 
 
 
-            </td>
-        </tr>
-}
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section scripts    {
+    <script>
+        $(document).ready(function () {
+            $('#tblData').DataTable();
+        });
+    </script> }
