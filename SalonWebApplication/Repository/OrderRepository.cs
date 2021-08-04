@@ -65,7 +65,6 @@ namespace SalonWebApplication.Repository
 
         public bool save()
         {
-            _db.SaveChanges();
             return _db.SaveChanges() > 0;
             // throw new NotImplementedException();
         }

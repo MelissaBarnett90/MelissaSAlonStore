@@ -14,14 +14,16 @@ namespace SalonWebApplication.Controllers
 {
     public class OrderController : Controller
     {
+        private readonly IOrdersDetailsRepository _ordersDetailsRepo;
         private readonly IOrderRepository _OrderRepo;
         private readonly ICustomerRepository _customerRepo;
         private readonly IPaymentTypeRepository _paymentRepo;
         private readonly IProductRepository _prodRepo;
         private readonly IMapper _mapper;
 
-        public OrderController(IOrderRepository orderrepo,IProductRepository prodRepo, ICustomerRepository customerRepo,IPaymentTypeRepository paymentRepo, IMapper mapper)
+        public OrderController(IOrdersDetailsRepository OrdersDetailsRepo, IOrderRepository orderrepo,IProductRepository prodRepo, ICustomerRepository customerRepo,IPaymentTypeRepository paymentRepo, IMapper mapper)
         {
+            _ordersDetailsRepo = OrdersDetailsRepo;
             _OrderRepo = orderrepo;
             _customerRepo = customerRepo;
             _paymentRepo = paymentRepo;
@@ -53,6 +55,8 @@ namespace SalonWebApplication.Controllers
             }
             var typesoforder = _OrderRepo.FindById(id);
             var maptoOrder = _mapper.Map<OrderViewModel>(typesoforder);
+            var details = (_ordersDetailsRepo.FindAll()).Where(q => q.OrderId == id);
+            maptoOrder.OrdersDetails = _mapper.Map<List<OrdersDetailsViewModel>>(details);
             return View(maptoOrder);
         }
 
@@ -99,6 +103,7 @@ namespace SalonWebApplication.Controllers
         {
              try
              {
+              
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
@@ -159,6 +164,8 @@ namespace SalonWebApplication.Controllers
             };
 
             var orderproduct = _mapper.Map<Order>(salevalue);
+             
+
             var isuccessful = _OrderRepo.Create(orderproduct);
 
             if (!isuccessful)

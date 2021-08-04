@@ -28,11 +28,11 @@ namespace SalonWebApplication.Models
         public PaymentTypeViewModel PaymentType { get; set; }
         public IEnumerable<SelectListItem> PaymentTypes { get; set; }
         public int PaymentTypeId { get; set; }
-      /*  public string Paymentname { get; set; }*/
+        /*  public string Paymentname { get; set; }*/
 
+        public List<OrdersDetailsViewModel> OrdersDetails { get; set; }
 
-     
-  [Display(Name ="Product Name")]
+        [Display(Name ="Product Name")]
         public int ProductId { get; set; }
         public ProductViewModel Product { get; set; }
      

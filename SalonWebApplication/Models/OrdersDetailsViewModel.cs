@@ -16,7 +16,7 @@ namespace SalonWebApplication.Models
         public IEnumerable<SelectListItem> Orders { get; set; }
         public int OrderId { get; set; }
 
-
+        public int Quantity { get; set; }
         public ProductViewModel Product { get; set; }
         public IEnumerable<SelectListItem> Products { get; set; }
         public int ProductId { get; set; }
