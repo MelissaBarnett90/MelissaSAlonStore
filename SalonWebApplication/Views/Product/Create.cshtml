@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Enter</h1>
 
-<h4>ProductViewModel</h4>
+<h4>Products</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -42,9 +42,11 @@
                <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+           <div class="form-group">
+               <input type="submit" value="Create" class="btn btn-primary" />
+
+               <input type="reset" value="Clear Form" class="btn btn-sm btn-primary" id="btnClear" />
+           </div>
         </form>
     </div>
 </div>

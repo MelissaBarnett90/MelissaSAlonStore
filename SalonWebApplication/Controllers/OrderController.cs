@@ -63,6 +63,7 @@ namespace SalonWebApplication.Controllers
         // GET: OrderController/Create
         public ActionResult Create()
         {
+            
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
@@ -99,7 +100,7 @@ namespace SalonWebApplication.Controllers
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrderViewModel model)
+        public ActionResult Create(OrderViewModel model,OrdersDetailsViewModel ordersDetailsViewModel,int id)
         {
              try
              {
@@ -163,7 +164,14 @@ namespace SalonWebApplication.Controllers
 
             };
 
+               
+
             var orderproduct = _mapper.Map<Order>(salevalue);
+
+                //displaying information
+                var details = (_ordersDetailsRepo.FindAll()).Where(q => q.OrderId == id);
+
+                var OrderInfo = _mapper.Map<OrdersDetailsViewModel>(salevalue);
              
 
             var isuccessful = _OrderRepo.Create(orderproduct);
