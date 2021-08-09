@@ -1,4 +1,5 @@
-﻿using SalonWebApplication.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace SalonWebApplication.Repository
 
         public ICollection<OrdersDetails> FindAll()
         {
-            _db.OrderDetails.ToList();
+            _db.OrderDetails.Include(q => q.Product).ToList();
             return _db.OrderDetails.ToList();
             //throw new NotImplementedException();
         }
@@ -62,7 +63,7 @@ namespace SalonWebApplication.Repository
 
         public bool save()
         {
-            throw new NotImplementedException();
+            return _db.SaveChanges() > 0;
         }
 
         public bool Update(OrdersDetails entity)

@@ -24,6 +24,7 @@ namespace SalonWebApplication.Models
         public IEnumerable<SelectListItem> Employees { get; set; }
               
         public int EmployeeId { get; set; }
+        
 
         public CustomerViewModel Customer { get; set; }
         public IEnumerable<SelectListItem> Customers { get; set; }      

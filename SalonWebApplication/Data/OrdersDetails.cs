@@ -18,7 +18,7 @@ namespace SalonWebApplication.Data
         [Required]
 
         [ForeignKey("ProductId")]
-        public Product Products { get; set; }
+        public Product Product { get; set; }
        
         public int ProductId{ get; set; }
 

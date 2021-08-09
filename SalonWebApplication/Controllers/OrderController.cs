@@ -55,7 +55,7 @@ namespace SalonWebApplication.Controllers
             }
             var typesoforder = _OrderRepo.FindById(id);
             var maptoOrder = _mapper.Map<OrderViewModel>(typesoforder);
-            var details = (_ordersDetailsRepo.FindAll()).Where(q => q.OrderId == id);
+            var details = (_ordersDetailsRepo.FindAll()).Where(q => q.OrderId == id).ToList();
             maptoOrder.OrdersDetails = _mapper.Map<List<OrdersDetailsViewModel>>(details);
             return View(maptoOrder);
         }
@@ -105,6 +105,9 @@ namespace SalonWebApplication.Controllers
              try
              {
               
+              
+
+
             var clients = _customerRepo.FindAll();
             var customername = clients.Select(q => new SelectListItem
             {
@@ -146,33 +149,28 @@ namespace SalonWebApplication.Controllers
             }
 
             model.Total = totalcost;
-                var salevalue = new OrderViewModel
-                {
-                    // objects to pass into the model
-                    CustomerId = model.CustomerId,
-                  /*   CustomerName = model.CustomerName,*/
-                    Customer = model.Customer,
-                    ProductId = model.ProductId,
-                  /*  ProductName = model.ProductName,*/
-                  PaymentTypeId=model.PaymentTypeId,
-                    ProductPrices = model.ProductPrices,
-                    Product = model.Product,
-                    ProductQuantities = model.ProductQuantities,
-                    OrderId = model.OrderId,
-                    Total = model.Total,
-                    OrderDate = model.OrderDate
+                /* var salevalue = new OrderViewModel
+                 {
+                     // objects to pass into the model
+                     CustomerId = model.CustomerId,
+                   *//*   CustomerName = model.CustomerName,*//*
+                     Customer = model.Customer,
+                     ProductId = model.ProductId,
+                   *//*  ProductName = model.ProductName,*//*
+                   PaymentTypeId=model.PaymentTypeId,
+                     ProductPrices = model.ProductPrices,
+                     Product = model.Product
+                     ProductQuantities = model.ProductQuantities,
+                     OrderId = model.OrderId,
+                     Total = model.Total,
+                     OrderDate = model.OrderDate
 
-            };
+             };
+ */
+                
 
-               
-
-            var orderproduct = _mapper.Map<Order>(salevalue);
-
-                //displaying information
-                var details = (_ordersDetailsRepo.FindAll()).Where(q => q.OrderId == id);
-
-                var OrderInfo = _mapper.Map<OrdersDetailsViewModel>(salevalue);
-             
+            var orderproduct = _mapper.Map<Order>(model);
+            
 
             var isuccessful = _OrderRepo.Create(orderproduct);
 
@@ -182,6 +180,20 @@ namespace SalonWebApplication.Controllers
                 return View(model);
 
             }
+                model.OrdersDetails = new List<OrdersDetailsViewModel>();
+                model.OrdersDetails.Add(new OrdersDetailsViewModel
+                {
+                    ProductId = model.ProductId,
+                    Quantity = model.ProductQuantities,
+                    OrderId = orderproduct.OrderId
+                });
+                var orderDetails = _mapper.Map<List<OrdersDetails>>(model.OrdersDetails);
+                foreach (var item in orderDetails)
+                {
+                    _ordersDetailsRepo.Create(item);
+                }
+               
+
             return RedirectToAction(nameof(Index));
         }
             catch(Exception ex)

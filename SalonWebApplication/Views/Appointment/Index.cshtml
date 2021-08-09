@@ -44,10 +44,10 @@
                     @Html.DisplayFor(modelItem => item.AppointmentTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CustomerId)
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerFirstName) @Html.DisplayFor(modelItem => item.Customer.CustomerLastName)
                 </td>
                 <td>
 

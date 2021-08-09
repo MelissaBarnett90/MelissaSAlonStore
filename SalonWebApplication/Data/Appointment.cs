@@ -17,15 +17,15 @@ namespace SalonWebApplication.Data
        
         [Required]
      
-        public String AppointmentTime { get; set; }
+        public string AppointmentTime { get; set; }
 
         [ForeignKey("EmployeeId")]
-        public Employee Employees { get; set; }
+        public Employee Employee { get; set; }
         public int EmployeeId { get; set; }
 
 
         [ForeignKey("CustomerId")]
-        public Customer Customers { get; set; }
+        public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
       

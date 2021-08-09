@@ -1,4 +1,5 @@
-﻿using SalonWebApplication.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace SalonWebApplication.Repository
 
         public ICollection<Appointment> FindAll()
         {
-            _db.Appointments.ToList();
+            _db.Appointments.Include(q => q.Customer).Include(q => q.Employee).ToList();
             return _db.Appointments.ToList();
             //throw new NotImplementedException();
         }
