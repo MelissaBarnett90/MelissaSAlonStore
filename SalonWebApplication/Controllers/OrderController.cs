@@ -144,7 +144,7 @@ namespace SalonWebApplication.Controllers
             }
             else if (model.ProductQuantities <= 0)
             {
-                ModelState.AddModelError("", "please enter a value for the quantity");
+                ModelState.AddModelError("", "Please enter a value for the quantity");
                 return View(model);
             }
 

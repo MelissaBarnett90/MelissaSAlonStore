@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using SalonWebApplication.Models;
@@ -53,39 +54,78 @@ namespace SalonWebApplication.Controllers
         // GET: ServiceAppointmentController/Create
         public ActionResult Create()
         {
-            return View();
-        }
+            var serviceo = _serviceRepo.FindAll();
+            var serviceClients = serviceo.Select(q => new SelectListItem
+            {
+                Text = q.ServiceName,
+                Value = q.ServiceId.ToString()
+            });
 
+            var custo = _appointmentRepo.FindAll();
+            var employeeCustomer = custo.Select(q => new SelectListItem
+            {
+                Text = $"{ q.Customer.CustomerFirstName } {q.Customer.CustomerLastName}",
+                Value = q.CustomerId.ToString(),
+
+            });
+
+            var model = new ServiceAppointmentViewModel
+            {
+                Services = serviceClients,
+               Appointments = employeeCustomer
+            };
+
+            return View(model);  
+            
+                }
         // POST: ServiceAppointmentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ServiceAppointment model)
+        public ActionResult Create(ServiceAppointmentViewModel model)
         {
-            try
-            {
-                if (!ModelState.IsValid)
+            
+
+                try
                 {
-                    return View(model);
+                var serviceo = _serviceRepo.FindAll();
+                var serviceClients = serviceo.Select(q => new SelectListItem
+                {
+                    Text = q.ServiceName,
+                    Value = q.ServiceId.ToString()
+                });
+
+                var custo = _appointmentRepo.FindAll();
+                var employeeCustomer = custo.Select(q => new SelectListItem
+                {
+                    Text = $"{ q.Customer.CustomerFirstName } {q.Customer.CustomerLastName}",
+                    Value = q.CustomerId.ToString(),
+
+                });
+
+
+                if (!ModelState.IsValid)
+                    {
+                        return View(model);
+                    }
+                    var servoappointment = _mapper.Map<ServiceAppointment>(model);
+                    var issuccessful = _serviceAppointmentRepo.Create(servoappointment);
+                    if (!issuccessful)
+                    {
+                        ModelState.AddModelError("", "Something Went wrong......");
+                        return View(model);
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                var appservice = _mapper.Map<ServiceAppointment>(model);
-                var issuccessful = _serviceAppointmentRepo.Create(appservice);
-                if (!issuccessful)
+                catch(Exception ex)
                 {
                     ModelState.AddModelError("", "Something Went wrong......");
                     return View(model);
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Something Went wrong......");
-                return View(model);
-            }
+            
         }
 
-
-        // GET: ServiceAppointmentController/Edit/5
-        public ActionResult Edit(int id)
+            // GET: ServiceAppointmentController/Edit/5
+            public ActionResult Edit(int id)
         {
             if (!_serviceAppointmentRepo.isExist(id))
             {

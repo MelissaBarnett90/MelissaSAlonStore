@@ -12,21 +12,28 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ServiceAppointmentId" class="control-label"></label>
-                <input asp-for="ServiceAppointmentId" class="form-control" />
-                <span asp-validation-for="ServiceAppointmentId" class="text-danger"></span>
-            </div>
+
+            @*  <div class="form-group">
+              <label asp-for="ServiceAppointmentId" class="control-label"></label>
+              @Html.DropDownListFor(q => q.ServiceAppointmentId, new SelectList(Model.ServiceAppointments, "Value", "Text"), "Select an appointment",
+        new { @class = "form-control" })
+              <span asp-validation-for="ServiceAppointmentId" class="text-danger"></span>
+          </div>*@
+
             <div class="form-group">
                 <label asp-for="ServiceId" class="control-label"></label>
-                <input asp-for="ServiceId" class="form-control" />
+                @Html.DropDownListFor(q => q.ServiceId, new SelectList(Model.Services, "Value", "Text"), "Select a service",
+          new { @class = "form-control" })
                 <span asp-validation-for="ServiceId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="AppointmentId" class="control-label"></label>
-                <input asp-for="AppointmentId" class="form-control" />
+                @Html.DropDownListFor(q => q.Appointment.CustomerId, new SelectList(Model.Appointments, "Value", "Text"), "Select customer",
+          new { @class = "form-control" })
                 <span asp-validation-for="AppointmentId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
 

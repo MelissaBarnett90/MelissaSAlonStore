@@ -38,7 +38,8 @@
                     @Html.DisplayFor(modelItem => item.ServiceName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServiceCost)
+                    @item.ServiceCost.ToString("C")
+                    @* @Html.DisplayFor(modelItem => item.ServiceCost)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Duration)

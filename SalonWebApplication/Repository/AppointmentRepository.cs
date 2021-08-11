@@ -67,6 +67,7 @@ namespace SalonWebApplication.Repository
 
         public bool isExist(int id)
         {
+            _db.Appointments.Include(q => q.Customer).Include(q => q.Employee).ToList();
             var exist = _db.Appointments.Any(q => q.AppointmentId == id);
             return exist;
         }
