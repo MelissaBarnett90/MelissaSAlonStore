@@ -86,7 +86,8 @@ namespace SalonWebApplication.Controllers
             
 
                 try
-                {
+                
+            {
                 var serviceo = _serviceRepo.FindAll();
                 var serviceClients = serviceo.Select(q => new SelectListItem
                 {

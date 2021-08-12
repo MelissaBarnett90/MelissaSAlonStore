@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,17 +13,22 @@ namespace SalonWebApplication.Models
         [Key]
         public int ProductId { get; set; }
         public IEnumerable<SelectListItem> Products { get; set; }
+        [DisplayName("Product Id")]
         [Required]
 
         public string ProductName { get; set; }
+        [DisplayName("Product Name")]
         [Required]
 
         public float ProductCost { get; set; }
+        [DisplayName("Product Cost")]
         [Required]
 
         public int ProductQty { get; set; }
+        [DisplayName("Product Quantity")]
 
         public string ProductImg { get; set; }
+        [DisplayName("Product Image")]
 
 
         [Required(ErrorMessage = "Please upload an image")]
