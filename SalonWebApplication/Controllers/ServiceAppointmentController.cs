@@ -55,24 +55,24 @@ namespace SalonWebApplication.Controllers
         public ActionResult Create()
         {
             var serviceo = _serviceRepo.FindAll();
-            var serviceClients = serviceo.Select(q => new SelectListItem
+            var serviceClients = serviceo.Select(q => new 
             {
                 Text = q.ServiceName,
                 Value = q.ServiceId.ToString()
             });
 
             var custo = _appointmentRepo.FindAll();
-            var employeeCustomer = custo.Select(q => new SelectListItem
+            var employeeCustomer = custo.Select(q => new 
             {
                 Text = $"{ q.Customer.CustomerFirstName } {q.Customer.CustomerLastName}",
-                Value = q.CustomerId.ToString(),
+                Value = q.AppointmentId.ToString(),
 
             });
 
+            ViewBag.Services = serviceClients;
+            ViewBag.Appointments = employeeCustomer;
             var model = new ServiceAppointmentViewModel
             {
-                Services = serviceClients,
-               Appointments = employeeCustomer
             };
 
             return View(model);  
@@ -102,6 +102,9 @@ namespace SalonWebApplication.Controllers
 
                 });
 
+                ViewBag.Services = serviceClients;
+                ViewBag.Appointments = employeeCustomer;
+
 
                 if (!ModelState.IsValid)
                     {
@@ -118,7 +121,7 @@ namespace SalonWebApplication.Controllers
                 }
                 catch(Exception ex)
                 {
-                    ModelState.AddModelError("", "Something Went wrong......");
+                    ModelState.AddModelError("", ex.Message);
                     return View(model);
                 }
             

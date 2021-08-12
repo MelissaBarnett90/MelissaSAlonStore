@@ -22,14 +22,14 @@
 
             <div class="form-group">
                 <label asp-for="ServiceId" class="control-label"></label>
-                @Html.DropDownListFor(q => q.ServiceId, new SelectList(Model.Services, "Value", "Text"), "Select a service",
+                @Html.DropDownListFor(q => q.ServiceId, new SelectList(ViewBag.Services, "Value", "Text"), "Select a service",
           new { @class = "form-control" })
                 <span asp-validation-for="ServiceId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="AppointmentId" class="control-label"></label>
-                @Html.DropDownListFor(q => q.Appointment.CustomerId, new SelectList(Model.Appointments, "Value", "Text"), "Select customer",
+                @Html.DropDownListFor(q => q.AppointmentId, new SelectList(ViewBag.Appointments, "Value", "Text"), "Select customer",
           new { @class = "form-control" })
                 <span asp-validation-for="AppointmentId" class="text-danger"></span>
             </div>

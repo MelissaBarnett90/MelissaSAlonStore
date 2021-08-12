@@ -23,7 +23,7 @@ namespace SalonWebApplication.Mappers
             CreateMap<PaymentType, PaymentTypeViewModel>().ReverseMap();
 
             CreateMap<Product, ProductViewModel>().ReverseMap();
-            CreateMap<ServiceAppointment, ServiceAppointmentViewModel>().ReverseMap();
+            CreateMap<ServiceAppointment,ServiceAppointmentViewModel>().ReverseMap();
             CreateMap<Service, ServiceViewModel>().ReverseMap();
        
 

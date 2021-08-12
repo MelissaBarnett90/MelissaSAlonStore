@@ -1,4 +1,5 @@
-﻿using SalonWebApplication.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace SalonWebApplication.Repository
 
         public ICollection<ServiceAppointment> FindAll()
         {
-            _db.ServiceAppointments.ToList();
+            _db.ServiceAppointments.Include(q => q.Services).Include(q => q.Appointments).ToList();
+           // _db.ServiceAppointments.ToList();
             return _db.ServiceAppointments.ToList();
             //throw new NotImplementedException();
         }
@@ -57,6 +59,7 @@ namespace SalonWebApplication.Repository
 
         public bool isExist(int id)
         {
+            _db.ServiceAppointments.Include(q => q.Services).Include(q => q.Appointments).ToList();
             var exist = _db.ServiceAppointments.Any(q => q.ServiceAppointmentId == id);
             return exist;
         }
