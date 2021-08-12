@@ -14,22 +14,35 @@ namespace SalonWebApplication.Models
         public int CustomerId { get; set; }
         public IEnumerable<SelectListItem> Employees { get; set; }
         [Required]
+
+        [DisplayName("Customer First Name")]
         public string CustomerFirstName { get; set; }
         [Required]
+
+        [DisplayName("Customer Last Name")]
         public string CustomerLastName { get; set; }
-        [DisplayName("Date of Birth")]
+        
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayName("Date of Birth")]
         public String CustomerDOB { get; set; }
+        
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Phone Number Required!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
           ErrorMessage = "Entered phone format is not valid.")]
+
+        [DisplayName("Customer Contact")]
         public string CustomerContact { get; set; }
         [Required]
+
+        [DisplayName("Customer Address")]
         public string CustomerAddress { get; set; }
+
+        [DisplayName("Customer Occupation")]
         public string CustomerOccupation { get; set; }
+       
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "TRN")]
