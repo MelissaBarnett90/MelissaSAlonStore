@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using SalonWebApplication.Models;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Controllers
 {
+    [Authorize]
     public class ServiceAppointmentController : Controller
     {
         private readonly IServiceAppointmentRepository _serviceAppointmentRepo;

@@ -32,10 +32,10 @@
                     @Html.DisplayFor(modelItem => item.ServiceAppointmentId)
                 </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServiceId)
+                    @Html.DisplayFor(modelItem => item.Service.ServiceName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AppointmentId)
+                    @Html.DisplayFor(modelItem => item.Appointment.Customer.CustomerFirstName)
                 </td>
                 <td>
 

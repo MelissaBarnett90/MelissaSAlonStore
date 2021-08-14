@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _CustomerRepo;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SalonWebApplication.Controllers
-{
+{ 
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly  IAppointmentRepository _AppointmentRepo;

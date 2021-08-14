@@ -17,14 +17,14 @@ namespace SalonWebApplication.Models
 
         public ServiceViewModel Service { get; set; }
 
-        //public IEnumerable<SelectListItem> Services { get; set; }
+      /*  public IEnumerable<SelectListItem> Services { get; set; }*/
         [DisplayName("Service")]
         public int ServiceId { get; set; }
 
        
         public AppointmentViewModel Appointment { get; set; }
 
-        //public IEnumerable<SelectListItem> Appointments { get; set; }
+ /*       public IEnumerable<SelectListItem> Appointments { get; set; }*/
         [DisplayName("Appointment Id")]
         public int AppointmentId { get; set; }
     }

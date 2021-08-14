@@ -30,7 +30,7 @@ namespace SalonWebApplication.Repository
 
         public ICollection<ServiceAppointment> FindAll()
         {
-            _db.ServiceAppointments.Include(q => q.Services).Include(q => q.Appointments).ToList();
+            _db.ServiceAppointments.Include(q => q.Services.ServiceName).Include(q => q.Appointments).Include(q => q.Appointments.Customer.CustomerFirstName).ToList();
            // _db.ServiceAppointments.ToList();
             return _db.ServiceAppointments.ToList();
             //throw new NotImplementedException();
@@ -59,7 +59,8 @@ namespace SalonWebApplication.Repository
 
         public bool isExist(int id)
         {
-            _db.ServiceAppointments.Include(q => q.Services).Include(q => q.Appointments).ToList();
+            _db.ServiceAppointments.Include(q => q.Services.ServiceName).Include(q => q.Appointments).Include(q => q.Appointments.Customer.CustomerFirstName).ToList();
+
             var exist = _db.ServiceAppointments.Any(q => q.ServiceAppointmentId == id);
             return exist;
         }

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,7 +10,8 @@
     <title>@ViewData["Title"] - SalonWebApplication</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-    <<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -28,25 +33,35 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item text-dark" asp-controller="Appointment" asp-action="Index">Appointment</a>
-                                <a class="dropdown-item text-dark" asp-controller="Customer" asp-action="Index">Customers</a>
-                                <a class="dropdown-item text-dark" asp-controller="Employee" asp-action="Index">Employees</a>
-                                <a class="dropdown-item text-dark" asp-controller="OrdersDetails" asp-action="Index">Orders Details</a>
-                                <a class="dropdown-item text-dark" asp-controller="Order" asp-action="Index">Order</a>
-                                <a class="dropdown-item text-dark" asp-controller="PaymentType" asp-action="Index">Payment</a>
-                                <a class="dropdown-item text-dark" asp-controller="Product" asp-action="Index">Products</a>
-                                <a class="dropdown-item text-dark" asp-controller="ServiceAppointment" asp-action="Index">Service Appointment</a>
-                                <a class="dropdown-item text-dark" asp-controller="Service" asp-action="Index">Service</a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.IsInRole("Administrator"))
+                            {
 
-                            </div>
-                        </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        Manage
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-dark" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                                        <a class="dropdown-item text-dark" asp-controller="Customer" asp-action="Index">Customers</a>
+                                        <a class="dropdown-item text-dark" asp-controller="Employee" asp-action="Index">Employees</a>
+                                        @*   <a class="dropdown-item text-dark" asp-controller="OrdersDetails" asp-action="Index">Orders Details</a>*@
+                                        <a class="dropdown-item text-dark" asp-controller="Order" asp-action="Index">Order</a>
+                                        <a class="dropdown-item text-dark" asp-controller="PaymentType" asp-action="Index">Payment</a>
+                                        <a class="dropdown-item text-dark" asp-controller="Product" asp-action="Index">Products</a>
+                                        <a class="dropdown-item text-dark" asp-controller="ServiceAppointment" asp-action="Index">Service Appointment</a>
+                                        <a class="dropdown-item text-dark" asp-controller="Service" asp-action="Index">Service</a>
+
+                                    </div>
+                                </li>
+
+                            }
+
+
+                        }
                     </ul>
-                   
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>

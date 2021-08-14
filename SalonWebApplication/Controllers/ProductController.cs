@@ -7,12 +7,14 @@ using SalonWebApplication.Data;
 using SalonWebApplication.Models;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SalonWebApplication.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
 

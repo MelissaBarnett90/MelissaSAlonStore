@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SalonWebApplication.Contracts;
 using SalonWebApplication.Data;
 using SalonWebApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SalonWebApplication.Controllers
 {
+    [Authorize]
     public class ServiceController : Controller
     {
         private readonly IServiceRepository _serviceRepo;

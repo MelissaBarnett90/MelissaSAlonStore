@@ -16,7 +16,7 @@ namespace SalonWebApplication.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -82,6 +82,10 @@ namespace SalonWebApplication.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -133,6 +137,8 @@ namespace SalonWebApplication.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -237,8 +243,8 @@ namespace SalonWebApplication.Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AppointmentId");
 
@@ -280,36 +286,6 @@ namespace SalonWebApplication.Data.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("SalonWebApplication.Data.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("EmployeeContact")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeDOb")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeGender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeImg")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("SalonWebApplication.Data.Order", b =>
@@ -459,6 +435,31 @@ namespace SalonWebApplication.Data.Migrations
                     b.ToTable("ServiceAppointments");
                 });
 
+            modelBuilder.Entity("SalonWebApplication.Data.Employee", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("EmployeeContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeDOb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeGender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Employee");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -520,9 +521,7 @@ namespace SalonWebApplication.Data.Migrations
 
                     b.HasOne("SalonWebApplication.Data.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Customer");
 
