@@ -57,9 +57,9 @@ namespace SalonWebApplication.Repository
             throw new NotImplementedException();
         }
 
-        public bool isExist(string id)
+        public bool isExist(int id)
             {
-                var exist = _db.Employees.Any(q => q.Id == id);
+                var exist = _db.Employees.Any(q => q.EmployeeId == id);
                 return exist;
             }
 
@@ -76,9 +76,9 @@ namespace SalonWebApplication.Repository
                 // throw new NotImplementedException();
             }
 
-        bool IRepositoryBase<Employee>.isExist(int id)
+      /*  bool IRepositoryBase<Employee>.isExist(int id)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

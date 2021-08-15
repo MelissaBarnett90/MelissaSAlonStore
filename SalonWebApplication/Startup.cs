@@ -38,7 +38,7 @@ namespace SalonWebApplication
 
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+       services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrdersDetailsRepository, OrdersDetailsRepository>();
             services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();

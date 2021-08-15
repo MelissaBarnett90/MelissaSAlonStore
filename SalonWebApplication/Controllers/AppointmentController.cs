@@ -69,7 +69,7 @@ namespace SalonWebApplication.Controllers
             var employeeClients = employee.Select(q => new SelectListItem
             {
                 Text = q.FirstName,
-                Value = q.Id.ToString()
+                Value = q.EmployeeId.ToString()
 
 
             });

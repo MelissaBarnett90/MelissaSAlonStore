@@ -21,7 +21,7 @@ namespace SalonWebApplication.Data
 
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
-        public string EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
 
         [ForeignKey("CustomerId")]

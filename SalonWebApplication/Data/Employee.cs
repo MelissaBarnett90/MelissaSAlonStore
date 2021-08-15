@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SalonWebApplication.Data
 {
-    public class Employee : IdentityUser
-    { 
-      
+    public class Employee 
+    {
+        public int EmployeeId { get; set; }
         public string FirstName {get;set;}
         public string LastName {get;set;}
         public string EmployeeImg {get;set;}

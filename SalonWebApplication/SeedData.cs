@@ -43,11 +43,11 @@ namespace SalonWebApplication
                 var result = roleManager.CreateAsync(role).Result;
             }
 
-            if (!roleManager.RoleExistsAsync("Employee").Result)
+            if (!roleManager.RoleExistsAsync("Memeber").Result)
             {
                 var role = new IdentityRole
                 {
-                    Name = "Employee"
+                    Name = "Memeber"
                 };
                 var result = roleManager.CreateAsync(role).Result;
             }

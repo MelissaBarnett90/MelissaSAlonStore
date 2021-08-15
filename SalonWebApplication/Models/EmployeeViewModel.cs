@@ -9,7 +9,7 @@ namespace SalonWebApplication.Models
     {
         [Key]
         [DisplayName("Id Number")]
-        public string Id { get; set; }
+        public int EmployeeId { get; set; }
         public IEnumerable <SelectListItem> Employees { get; set; }
 
         [DisplayName("Last Name")]

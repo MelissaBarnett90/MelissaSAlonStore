@@ -25,7 +25,7 @@ namespace SalonWebApplication.Models
         public EmployeeViewModel Employee { get; set; }
         public IEnumerable<SelectListItem> Employees { get; set; }
         [DisplayName("Employee")]
-        public string EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         
 
         public CustomerViewModel Customer { get; set; }
